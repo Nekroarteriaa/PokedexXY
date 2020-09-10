@@ -21,6 +21,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.children
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mancj.materialsearchbar.MaterialSearchBar
 import com.mancj.materialsearchbar.adapter.SuggestionsAdapter
@@ -83,7 +84,7 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
         myActivity = activity as PokedexBankActivity
         recyclerView = myActivity.findViewById(R.id.pokedexViewCards)
         recyclerView.hasFixedSize()
-        layoutManager = GridLayoutManager(activity, 2)
+        layoutManager = LinearLayoutManager(activity!!,LinearLayoutManager.VERTICAL,false) //GridLayoutManager(activity, 2)
 
         myActivity.currentFragment = this
 
@@ -160,8 +161,8 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
         })
 
 
-        var pokemonSearchBarArrowButton = pokemonSearch_bar.findViewById<AppCompatImageView>(R.id.mt_arrow)
-        var pokemonSearchBarCloseButton = pokemonSearch_bar.findViewById<AppCompatImageView>(R.id.mt_clear)
+        val pokemonSearchBarArrowButton = pokemonSearch_bar.findViewById<AppCompatImageView>(R.id.mt_arrow)
+        val pokemonSearchBarCloseButton = pokemonSearch_bar.findViewById<AppCompatImageView>(R.id.mt_clear)
         pokemonSearchBarArrowButton.setOnClickListener {SearchBackButtonBehaviour() }
         pokemonSearchBarCloseButton.setOnClickListener { onRestartPokeList() }
 
@@ -178,7 +179,7 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
         previousSearch.clear()
         for (item in PokeBank.PokemonBank)
         {
-            previousSearch.add(item.name!!)
+            previousSearch.add(item.name)
         }
         pokemonSearch_bar.visibility = View.VISIBLE
         pokemonSearch_bar.lastSuggestions = previousSearch
@@ -193,7 +194,7 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
 
             for(item in PokeBank.PokemonBank)
             {
-                if(item.name!!.toLowerCase().contains(text.toLowerCase()))
+                if(item.name.toLowerCase().contains(text.toLowerCase()))
                     searchResult.add(item)
             }
             search_adapter = PokemonIDCardsArrayAdapter(activity!!,searchResult, myActivity)

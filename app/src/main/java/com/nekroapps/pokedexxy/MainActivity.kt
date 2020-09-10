@@ -2,13 +2,16 @@ package com.nekroapps.pokedexxy
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import co.revely.gradient.RevelyGradient
 import com.google.gson.GsonBuilder
-import com.nekroapps.pokedexxy.Activities.MainMenu.PokedexMainMenuActivity
+import com.nekroapps.pokedexxy.Activities.PokedexBank.PokedexBankActivity
 import com.nekroapps.pokedexxy.PokeBank.PokeBank
 import com.nekroapps.pokedexxy.PokemonObject.Pokemon
+import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
 import java.io.StringReader
@@ -26,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        paintBackground()
+
 
         gettingFilledPokemonBank()
 
@@ -33,8 +38,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun gettingFilledPokemonBank() {
-        val url =
-            "https://gist.githubusercontent.com/mrcsxsiq/b94dbe9ab67147b642baa9109ce16e44/raw/97811a5df2df7304b5bc4fbb9ee018a0339b8a38/"
 
         val request = Request.Builder()
             .url("https://gist.githubusercontent.com/mrcsxsiq/b94dbe9ab67147b642baa9109ce16e44/raw/97811a5df2df7304b5bc4fbb9ee018a0339b8a38")
@@ -48,8 +51,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 val strg = StringReader(response.body!!.string())
-                var gson = GsonBuilder().create()
+                val gson = GsonBuilder().create()
                 val mpoke = gson.fromJson(strg, Array<Pokemon>::class.java).toList()
+
 
                 PokeBank.PokemonBank = ArrayList(mpoke)
 
@@ -67,9 +71,19 @@ class MainActivity : AppCompatActivity() {
 
     fun goToMainMenu(context: Context)
     {
-        val intent = Intent(context,PokedexMainMenuActivity::class.java)
+        val intent = Intent(context, PokedexBankActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+    }
+
+    fun paintBackground()
+    {
+        RevelyGradient
+            .radial()
+            .colors(intArrayOf(Color.parseColor("#F77A26"),Color.parseColor("#FB6A3D"),Color.parseColor("#C54216")))
+            .angle(45f)
+            //.center(1020,30)
+            .onBackgroundOf(splashImage)
     }
 }
 

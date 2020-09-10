@@ -3,20 +3,12 @@ package com.nekroapps.pokedexxy.Activities.PokedexBank
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.nekroapps.pokedexxy.Activities.MainMenu.PokedexMainMenuActivity
 import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonListFragment
-import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonReviewFragment
+import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonReviewCanvasFragment
 import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonTypeListFragment
 import com.nekroapps.pokedexxy.Interfaces.IIDCardClickListener
 import com.nekroapps.pokedexxy.Interfaces.ITypeBadgeListener
-import com.nekroapps.pokedexxy.PokeBank.PokeBank
 import com.nekroapps.pokedexxy.PokemonObject.Pokemon
 import com.nekroapps.pokedexxy.R
 
@@ -45,7 +37,7 @@ class PokedexBankActivity : AppCompatActivity(), IIDCardClickListener, ITypeBadg
     override fun showPokemonReview(position: Int, iDCard: Pokemon) {
 
         selectedIDCard = iDCard
-        val frag = PokemonReviewFragment.newInstance()
+        val frag = PokemonReviewCanvasFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_holder, frag).addToBackStack(null).commit()
 
 
@@ -78,10 +70,10 @@ class PokedexBankActivity : AppCompatActivity(), IIDCardClickListener, ITypeBadg
             when(supportFragmentManager.backStackEntryCount)
             {
                 1-> {
-                    super.onBackPressed()
+                    super.onBackPressed()/*
                     val intent = Intent(this, PokedexMainMenuActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    startActivity(intent)}
+                    startActivity(intent)*/}
                 else -> {super.onBackPressed()}
             }
         }
