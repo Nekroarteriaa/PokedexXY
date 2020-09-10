@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.PokemonInformationFragments.PokemonAboutFragment">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rectangleMark"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/white">
+
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <TextView
+               android:id="@+id/pokemonDescription"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="" />
+
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:weightSum="2">
+
+               <TextView
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="20dp"
+                   android:text="@string/heightPokemon">
+
+               </TextView>
+
+               <TextView
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="20dp"
+                   android:text="@string/weightPokemon">
+
+               </TextView>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:weightSum="2"
+               android:layout_marginTop="-30dp">
+
+               <TextView
+                   android:id="@+id/pokemonHeightText"
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="20dp">
+
+               </TextView>
+
+               <TextView
+                   android:id="@+id/pokemonWeightText"
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="20dp">
+
+               </TextView>
+
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/categroyPokemon"
+               android:gravity="center">
+
+           </TextView>
+
+           <TextView
+               android:id="@+id/pokemonCategory"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/seedPokemon"
+               android:gravity="center">
+
+           </TextView>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/typesPokemon"
+               android:gravity="center"
+               android:layout_marginTop="15dp">
+
+           </TextView>
+
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:gravity="center_horizontal">
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/recyclerPokemonSelfType"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content">
+
+               </androidx.recyclerview.widget.RecyclerView>
+
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/weakPokemon"
+               android:gravity="center"
+               android:layout_marginTop="15dp">
+
+           </TextView>
+
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+              android:gravity="center_horizontal">
+
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/recyclerPokemonTypeWeakness"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content">
+
+               </androidx.recyclerview.widget.RecyclerView>
+
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/abilitiesPokemon"
+               android:gravity="center"
+               android:layout_marginTop="15dp">
+
+           </TextView>
+
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:weightSum="2">
+
+               <TextView
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="20dp"
+                   android:text="@string/malePercentage">
+
+               </TextView>
+
+               <TextView
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="20dp"
+                   android:text="@string/femalePercentage">
+
+               </TextView>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:weightSum="2"
+               android:layout_marginTop="-30dp">
+
+               <TextView
+                   android:id="@+id/pokemonMalePercentage"
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="45dp">
+
+               </TextView>
+
+               <TextView
+                   android:id="@+id/pokemonFemalePercentage"
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="50dp"
+                   android:gravity="center_vertical"
+                   android:layout_marginStart="45dp">
+
+               </TextView>
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

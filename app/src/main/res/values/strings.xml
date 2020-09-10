@@ -5,4 +5,22 @@
     <string name="image_description"> Background of an image </string>
     <string name="image_splashIcon"> Splash image </string>
     <string name="image_PokemonIDCardBackground"> Background of an PokemonIDCard  </string>
+    <string name="hpPokemonStat">HP:</string>
+    <string name="attackPokemonStat">Attack:</string>
+    <string name="defensePokemonStat">Defense:</string>
+    <string name="specialAttackPokemonStat">Special Attack:</string>
+    <string name="specialDefensePokemonStat">Special Defense:</string>
+    <string name="speedPokemonStat">Speed:</string>
+    <string name="totalPokemonStat">Total:</string>
+
+    <string name="heightPokemon">Height</string>
+    <string name="weightPokemon">Weight</string>
+    <string name="categroyPokemon">Category</string>
+    <string name="seedPokemon">Seed</string>
+    <string name="typesPokemon">Pokemon type(s)</string>
+    <string name="weakPokemon">Weak against</string>
+    <string name="malePercentage">Male Percentage</string>
+    <string name="femalePercentage">Female Percentage</string>
+    <string name="abilitiesPokemon">Female Percentage</string>
+
 </resources>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.PokemonInformationFragments.PokemonEvolutionChainFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rectangleMark"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:id="@+id/forthEvolutionFamilyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/forthBabyEvolutionFamilyImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/agua">
+
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/forthTeenEvolutionFormImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/bicho">
+
+                </ImageView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/forthVertical"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/forthAdultTopEvolutionFormImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/agua">
+
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/forthAdultBotomEvolutionFormImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/bicho">
+
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/firstEvolutionFamilyLayout"
+            android:weightSum="9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/firstBabyEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/firstTeenEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/firstAdultEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/secondEvolutionFamilyLayout"
+            android:paddingTop="110dp"
+            android:weightSum="9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/forthEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/fifthEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/sixthEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/thirdEvolutionFamilyLayout"
+            android:paddingTop="220dp"
+            android:weightSum="9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/seventhEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/eightEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/ninethEvolutionFormImage"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_launcher_background">
+
+            </ImageView>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>
