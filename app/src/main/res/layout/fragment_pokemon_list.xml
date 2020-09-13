@@ -6,34 +6,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.PokedexBankFragments.PokemonListFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <com.mancj.materialsearchbar.MaterialSearchBar
-            android:id="@+id/pokemonSearch_bar"
-            android:padding="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:mt_speechMode="false"
-            android:visibility="gone">
-
-        </com.mancj.materialsearchbar.MaterialSearchBar>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pokedexViewCards"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <com.mancj.materialsearchbar.MaterialSearchBar
+                android:id="@+id/pokemonSearch_bar"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mt_speechMode="false"
+                android:visibility="gone">
 
-    </LinearLayout>
+            </com.mancj.materialsearchbar.MaterialSearchBar>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pokedexViewCards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom">
+
+            <ImageView
+                android:id="@+id/searchBarActivator"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/searchbutton"
+                android:visibility="visible">
+
+            </ImageView>
+
+        </LinearLayout>
 
 
 
+    </RelativeLayout>
 
 </FrameLayout>

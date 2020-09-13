@@ -13,8 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.PokedexBank.PokedexBankActivity"></activity>
-        <activity android:name=".Activities.MainMenu.PokedexMainMenuActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainMenu.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -37,6 +37,8 @@ class PokemonAboutFragment : Fragment() {
         @JvmStatic
         fun newInstance() = PokemonAboutFragment()
             .apply {  }
+
+        fun fragmentName():String = "About"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

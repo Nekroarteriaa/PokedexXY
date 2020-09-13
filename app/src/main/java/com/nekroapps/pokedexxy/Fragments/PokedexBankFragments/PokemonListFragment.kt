@@ -6,11 +6,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.PopupMenu
@@ -18,6 +15,7 @@ import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.children
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,20 +26,11 @@ import com.mancj.materialsearchbar.adapter.SuggestionsAdapter
 import com.nekroapps.pokedexxy.Activities.PokedexBank.IRestartPokemonList
 import com.nekroapps.pokedexxy.Activities.PokedexBank.PokedexBankActivity
 import com.nekroapps.pokedexxy.Adapters.PokemonIDCardsArrayAdapter
-import com.nekroapps.pokedexxy.Interfaces.ApiService
 import com.nekroapps.pokedexxy.PokeBank.PokeBank
 import com.nekroapps.pokedexxy.PokemonObject.Pokemon
 import com.nekroapps.pokedexxy.R
 import kotlinx.android.synthetic.main.fragment_pokemon_list.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.NullPointerException
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.concurrent.schedule
 
 
 class PokemonListFragment : Fragment(), IRestartPokemonList {
@@ -75,7 +64,7 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
         settingVariables()
 
         getPokemonIDCardContent()
-       showPokedexGrid()
+        showPokedexGrid()
 
     }
 
@@ -90,6 +79,19 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
 
         myActivity.setPokemonListRestarterFragmentObject(this)
 
+
+
+
+        // Searching bar activator button
+        searchBarActivator.setOnClickListener {
+            pokemonSearch_bar.visibility = View.VISIBLE
+            pokemonSearch_bar.performClick()
+            pokemonSearch_bar.showSuggestionsList()
+            searchBarActivator.visibility = View.GONE
+        }
+
+
+        // Setting Searching bar
         pokemonSearch_bar.setHint("Enter Pokemon Name, Number or Type")
         pokemonSearch_bar.setCardViewElevation(10)
         pokemonSearch_bar.addTextChangeListener(object: TextWatcher{
@@ -113,6 +115,7 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
                 pokemonSearch_bar.lastSuggestions = suggest
 
                 searchedText = pokemonSearch_bar.text
+
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -123,19 +126,21 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
 
         pokemonSearch_bar.setOnSearchActionListener(object : MaterialSearchBar.OnSearchActionListener{
             override fun onSearchStateChanged(enabled: Boolean) {
-                if(!enabled)
+                /*if(!enabled)
                 {
-                    recyclerView.adapter = search_adapter
-                }
+                    onRestartPokeList()
+                    //recyclerView.adapter = search_adapter
+                }*/
             }
 
             override fun onSearchConfirmed(text: CharSequence?) {
+                myActivity.lastSearchedWords = text.toString()
                 startSearch(text.toString())
+                keyboardshit()
 
             }
 
             override fun onButtonClicked(buttonCode: Int) {
-
             }
 
         })
@@ -151,11 +156,9 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
 
                    }
                 }
-                myActivity.isShowingSearchResults = true
             }
 
             override fun OnItemDeleteListener(position: Int, v: View?) {
-
             }
 
         })
@@ -163,8 +166,10 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
 
         val pokemonSearchBarArrowButton = pokemonSearch_bar.findViewById<AppCompatImageView>(R.id.mt_arrow)
         val pokemonSearchBarCloseButton = pokemonSearch_bar.findViewById<AppCompatImageView>(R.id.mt_clear)
-        pokemonSearchBarArrowButton.setOnClickListener {SearchBackButtonBehaviour() }
+        pokemonSearchBarArrowButton.setOnClickListener {searchBackButtonBehaviour() }
         pokemonSearchBarCloseButton.setOnClickListener { onRestartPokeList() }
+
+
 
 
 
@@ -181,7 +186,7 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
         {
             previousSearch.add(item.name)
         }
-        pokemonSearch_bar.visibility = View.VISIBLE
+        //
         pokemonSearch_bar.lastSuggestions = previousSearch
     }
 
@@ -199,25 +204,29 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
             }
             search_adapter = PokemonIDCardsArrayAdapter(activity!!,searchResult, myActivity)
             recyclerView.adapter = search_adapter
-
-            myActivity.isShowingSearchResults = true
         }
     }
 
     override fun onRestartPokeList() {
+
         showPokedexGrid()
         pokemonSearch_bar.text=""
-        pokemonSearch_bar.hideSuggestionsList()
-        myActivity.isShowingSearchResults = false
+        pokemonSearch_bar.visibility = View.GONE
+        searchBarActivator.visibility = View.VISIBLE
+        myActivity.lastSearchedWords = ""
 
     }
 
     override fun onShowPokemonSearchingResults() {
 
-        pokemonSearch_bar.onClick(pokemonSearch_bar)
-        pokemonSearch_bar.text = searchedText
-        startSearch(pokemonSearch_bar.text)
-        pokemonSearch_bar.hideSuggestionsList()
+
+        startSearch(myActivity.lastSearchedWords)
+        myActivity.lastSearchedWords = ""
+
+        /* pokemonSearch_bar.onClick(pokemonSearch_bar)
+         pokemonSearch_bar.text = searchedText
+         startSearch(pokemonSearch_bar.text)
+         pokemonSearch_bar.hideSuggestionsList()*/
 
     }
 
@@ -226,11 +235,18 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
         startSearch(item.text.toString())
         pokemonSearch_bar.hideSuggestionsList()
         //pokemonSearch_bar.closeSearch()
+
+
+
+
     }
 
-    fun SearchBackButtonBehaviour()
+    fun searchBackButtonBehaviour()
     {
-        if(myActivity.isShowingSearchResults)
+
+        myActivity.onBackPressed()
+        //onRestartPokeList()
+        /*if(myActivity.isShowingSearchResults)
             onRestartPokeList()
 
         else if(!myActivity.isShowingSearchResults)
@@ -238,9 +254,32 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
             pokemonSearch_bar.hideSuggestionsList()
             val kb = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             kb.hideSoftInputFromWindow(pokemonSearch_bar.windowToken,0)
-        }
+        }*/
+
+      //  myActivity.onBackPressed()
+
+      //  pokemonSearch_bar.text=""
+       // pokemonSearch_bar.hideSuggestionsList()
+      //  pokemonSearch_bar.isClickable = false
+
+
+
 
     }
+
+    fun keyboardshit()
+    {
+        val view = activity!!.currentFocus
+        if(view != null)
+        {
+            val hideKeyboard = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            hideKeyboard.hideSoftInputFromWindow(view.windowToken,0)
+        }
+
+        activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+    }
+
+
 
 
 }
@@ -250,6 +289,8 @@ private fun getPokemonIDCardContent() {
     for (item in PokeBank.PokemonBank) {
         item.getPokemonContent()
     }
+
+
 
 
 

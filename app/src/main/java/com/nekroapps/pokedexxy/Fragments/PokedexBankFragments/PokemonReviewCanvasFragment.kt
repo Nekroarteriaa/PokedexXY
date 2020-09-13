@@ -2,9 +2,8 @@ package com.nekroapps.pokedexxy.Fragments.PokedexBankFragments
 
 import android.os.Bundle
 import android.view.*
-import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import co.revely.gradient.RevelyGradient
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
@@ -12,7 +11,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.GsonBuilder
 import com.nekroapps.pokedexxy.Activities.PokedexBank.PokedexBankActivity
 import com.nekroapps.pokedexxy.Adapters.FAAdapter
-import com.nekroapps.pokedexxy.Adapters.FragmentViewAdapter
 import com.nekroapps.pokedexxy.ConnectionData.PokeMoveDetail
 import com.nekroapps.pokedexxy.ConnectionData.PokemonInformation
 import com.nekroapps.pokedexxy.Fragments.PokemonInformationFragments.PokemonAboutFragment
@@ -28,10 +26,12 @@ import okhttp3.Request
 import java.io.IOException
 import java.io.StringReader
 
+
 class PokemonReviewCanvasFragment : Fragment(){
 
     lateinit var myActivity: PokedexBankActivity
     lateinit var pokeMoveDetail: ArrayList<PokeMoveDetail>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,10 @@ class PokemonReviewCanvasFragment : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pokemon_review_canvas, container, false)
+
+        val fragView = inflater.inflate(R.layout.fragment_pokemon_review_canvas, container, false)
+
+        return fragView
     }
 
     companion object {
@@ -48,7 +51,10 @@ class PokemonReviewCanvasFragment : Fragment(){
         @JvmStatic
         fun newInstance() = PokemonReviewCanvasFragment()
             .apply {  }
+
+        const val MIN_DISTANCE = 150
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,6 +65,8 @@ class PokemonReviewCanvasFragment : Fragment(){
 
         showPokemonInformation(myActivity.selectedIDCard)
         apiServicePokemonInformationDemand()
+
+
     }
 
     fun showPokemonInformation(selectedIDCard: Pokemon)
@@ -108,22 +116,31 @@ class PokemonReviewCanvasFragment : Fragment(){
         asd.add(PokemonStatsFragment.newInstance())
         asd.add(PokemonMovesFragment.newInstance())
 
+        val fragmentNameList: ArrayList<String> = ArrayList()
+
+        fragmentNameList.add(PokemonAboutFragment.fragmentName())
+        fragmentNameList.add(PokemonEvolutionChainFragment.fragmentName())
+        fragmentNameList.add(PokemonStatsFragment.fragmentName())
+        fragmentNameList.add(PokemonMovesFragment.fragmentName())
+
         val adaptr = FAAdapter(myActivity, asd, myActivity.supportFragmentManager)
         viewPager.adapter = adaptr
 
         TabLayoutMediator(tabLayout, viewPager){ tab, position ->
-            tab.text = "Pene"
+            tab.text = fragmentNameList[position]
 
             //myActivity.supportFragmentManager.beginTransaction().replace(R.id.pokemonInformation2, asd[0]).addToBackStack(null).commit()
 
             //PokeBank.printThis(tab.position.toString())
         }.attach()
 
+        myActivity.supportFragmentManager.beginTransaction().add(R.id.pokemonInformation, asd[0]).commit()
+
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
-                PokeBank.printThis(tab!!.position.toString())
-                myActivity.supportFragmentManager.beginTransaction().replace(R.id.pokemonInformation, asd[tab.position]).addToBackStack(null).commit()
+                //PokeBank.printThis(tab!!.position.toString())
+                myActivity.supportFragmentManager.beginTransaction().replace(R.id.pokemonInformation, asd[tab!!.position]).commit()
 
 
             }
@@ -142,6 +159,7 @@ class PokemonReviewCanvasFragment : Fragment(){
             }
 
         })
+
 
 
 
@@ -227,6 +245,5 @@ class PokemonReviewCanvasFragment : Fragment(){
         })
 
     }
-
 
 }

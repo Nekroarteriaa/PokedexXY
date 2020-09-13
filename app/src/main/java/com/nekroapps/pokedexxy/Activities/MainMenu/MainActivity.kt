@@ -1,4 +1,4 @@
-package com.nekroapps.pokedexxy
+package com.nekroapps.pokedexxy.Activities.MainMenu
 
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder
 import com.nekroapps.pokedexxy.Activities.PokedexBank.PokedexBankActivity
 import com.nekroapps.pokedexxy.PokeBank.PokeBank
 import com.nekroapps.pokedexxy.PokemonObject.Pokemon
+import com.nekroapps.pokedexxy.R
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException

@@ -33,6 +33,8 @@ class PokemonEvolutionChainFragment : Fragment() {
         @JvmStatic
         fun newInstance() = PokemonEvolutionChainFragment()
             .apply {  }
+
+        fun fragmentName():String = "Evolves"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -51,6 +51,8 @@ class PokemonMovesFragment : Fragment() {
         @JvmStatic
         fun newInstance() = PokemonMovesFragment()
             .apply {  }
+
+        fun fragmentName():String = "Moves"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

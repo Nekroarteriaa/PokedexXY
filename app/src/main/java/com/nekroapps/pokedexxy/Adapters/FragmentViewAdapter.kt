@@ -52,15 +52,35 @@ class FAAdapter(var context: Context , var frgmts : ArrayList<Fragment>, var frg
 
     override fun onBindViewHolder(holder: FAAdapter.MyViewHolder, position: Int) {
 
+        //PokeBank.printThis(position.toString())
+       // frgmManager.beginTransaction().add(R.id.pokemonInformation2, frgmts[position]).commit()
 
+        /*if(!isShowing)
+        {
+            frgmManager.beginTransaction().add(R.id.pokemonInformation, frgmts[position]).commit()
+            isShowing = true
+        }
+
+        else
+        {
+            frgmManager.beginTransaction().replace(R.id.pokemonInformation, frgmts[position]).commit()
+        }*/
+
+        /*
+        PokeBank.printThis(position.toString())
 
         if(!isShowing)
         {
-            frgmManager.beginTransaction().add(R.id.pokemonInformation2, frgmts[position]).addToBackStack(null).commit()
+            frgmManager.beginTransaction().add(R.id.pokemonInformation2, frgmts[position]).commit()
             isShowing = true
         }
-            //
 
+        else
+        {
+            frgmManager.beginTransaction().replace(R.id.pokemonInformation2, frgmts[position]).commit()
+        }
+            //
+        */
     }
 
     override fun getItemCount(): Int {

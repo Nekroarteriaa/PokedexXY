@@ -1,16 +1,24 @@
 package com.nekroapps.pokedexxy.Activities.PokedexBank
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonListFragment
 import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonReviewCanvasFragment
 import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonTypeListFragment
 import com.nekroapps.pokedexxy.Interfaces.IIDCardClickListener
 import com.nekroapps.pokedexxy.Interfaces.ITypeBadgeListener
+import com.nekroapps.pokedexxy.PokeBank.PokeBank
 import com.nekroapps.pokedexxy.PokemonObject.Pokemon
 import com.nekroapps.pokedexxy.R
+import kotlinx.android.synthetic.main.fragment_pokemon_list.*
 
 interface IRestartPokemonList{
     fun onRestartPokeList()
@@ -21,9 +29,9 @@ class PokedexBankActivity : AppCompatActivity(), IIDCardClickListener, ITypeBadg
 
     lateinit var selectedIDCard: Pokemon
     lateinit var currentFragment: Fragment
-    var isShowingSearchResults: Boolean = false
     lateinit var fragmentInterface: IRestartPokemonList
     lateinit var selectedBadge: String
+    var lastSearchedWords: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +39,6 @@ class PokedexBankActivity : AppCompatActivity(), IIDCardClickListener, ITypeBadg
 
         val frag = PokemonListFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.fragment_holder, frag).addToBackStack(null).commit()
-
     }
 
     override fun showPokemonReview(position: Int, iDCard: Pokemon) {
@@ -52,33 +59,19 @@ class PokedexBankActivity : AppCompatActivity(), IIDCardClickListener, ITypeBadg
 
     override fun onBackPressed() {
 
-        if(isShowingSearchResults)
+        //super.onBackPressed()
+
+        when(supportFragmentManager.backStackEntryCount)
         {
-            when(supportFragmentManager.backStackEntryCount)
-            {
-                1->  fragmentInterface.onRestartPokeList()
-                2 -> {super.onBackPressed()
-                        fragmentInterface.onShowPokemonSearchingResults()}
-                else -> {super.onBackPressed()}
-            }
-
-        }
-
-        else if(!isShowingSearchResults)
-        {
-
-            when(supportFragmentManager.backStackEntryCount)
-            {
-                1-> {
-                    super.onBackPressed()/*
-                    val intent = Intent(this, PokedexMainMenuActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    startActivity(intent)*/}
-                else -> {super.onBackPressed()}
-            }
+            1->  fragmentInterface.onRestartPokeList()
+            2 -> {super.onBackPressed()
+                    fragmentInterface.onShowPokemonSearchingResults()}
+            else -> {super.onBackPressed()}
         }
 
     }
+
+
 
     fun setPokemonListRestarterFragmentObject(interfaceObject: IRestartPokemonList)
     {
