@@ -92,7 +92,7 @@ class PokemonListFragment : Fragment(), IRestartPokemonList {
 
 
         // Setting Searching bar
-        pokemonSearch_bar.setHint("Enter Pokemon Name, Number or Type")
+        pokemonSearch_bar.setHint("Enter Pokemon Name")
         pokemonSearch_bar.setCardViewElevation(10)
         pokemonSearch_bar.addTextChangeListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

@@ -31,6 +31,7 @@ class PokemonReviewCanvasFragment : Fragment(){
 
     lateinit var myActivity: PokedexBankActivity
     lateinit var pokeMoveDetail: ArrayList<PokeMoveDetail>
+    var isShowingData:Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,13 +135,25 @@ class PokemonReviewCanvasFragment : Fragment(){
             //PokeBank.printThis(tab.position.toString())
         }.attach()
 
-        myActivity.supportFragmentManager.beginTransaction().add(R.id.pokemonInformation, asd[0]).commit()
+        if(!isShowingData)
+        {myActivity.supportFragmentManager.beginTransaction().add(R.id.pokemonInformation, asd[0]).commit()
+            isShowingData = true
+        }
+
+        else
+        {
+            myActivity.supportFragmentManager.beginTransaction().replace(R.id.pokemonInformation, asd[0]).commit()
+        }
+
+
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
                 //PokeBank.printThis(tab!!.position.toString())
                 myActivity.supportFragmentManager.beginTransaction().replace(R.id.pokemonInformation, asd[tab!!.position]).commit()
+
+
 
 
             }

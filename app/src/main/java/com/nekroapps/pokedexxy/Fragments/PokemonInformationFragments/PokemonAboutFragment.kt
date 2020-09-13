@@ -112,4 +112,5 @@ class PokemonAboutFragment : Fragment() {
         recyclerViewSymbolWeakness.adapter = weakness
     }
 
+
 }
