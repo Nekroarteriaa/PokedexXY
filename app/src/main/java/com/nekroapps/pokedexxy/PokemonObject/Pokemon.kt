@@ -37,7 +37,17 @@ data class Pokemon (var name: String,
     fun getPokemonContent()
     {
         val pokeNumbr = gettingPokemonNumber(id)
+        if(pokeNumbr <= 807)
         pokemon_imagesrc = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/ultra-sun-ultra-moon/${pokeNumbr}.png"
+
+        else
+        {
+            pokemon_imagesrc = if(pokeNumbr == 808) {
+                "https://img.pokemondb.net/sprites/home/normal/meltan.png"
+            } else {
+                "https://img.pokemondb.net/sprites/home/normal/melmetal.png"
+            }
+        }
 
         var nameLowercase = name.toLowerCase()
         nameLowercase = nameLowercase.replace("\\s".toRegex(),"")

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nekroapps.pokedexxy.Activities.PokedexBank.PokedexBankActivity
 import com.nekroapps.pokedexxy.Adapters.PokemonTypeSymbolAdapter
 import com.nekroapps.pokedexxy.Fragments.PokedexBankFragments.PokemonListFragment
+import com.nekroapps.pokedexxy.PokeBank.PokeBank
 import com.nekroapps.pokedexxy.PokemonObject.Pokemon
 import com.nekroapps.pokedexxy.R
 import kotlinx.android.synthetic.main.fragment_pokemon_about.*
@@ -81,23 +82,31 @@ class PokemonAboutFragment : Fragment() {
         lbs = lbs.replace("lbs", "")
 
         val weighttoKilos: Float = lbs.toFloat() / 2.2046f
-        val weightInKilos = String.format("%.2f", weighttoKilos).toFloat()
+
+        var formatted = String.format("%.2f", weighttoKilos)
+        formatted = formatted.replace(",", ".")
+
+        val weightInKilos = formatted.toFloat()
         return weightInKilos
     }
 
     private fun convertFeetsToMeters(selectedIDCard: Pokemon): Float {
         val splitted = selectedIDCard.height.split("'")
 
-        val feets = splitted[0]
+        var feets = splitted[0]
         var inches = splitted[1]
 
         inches = inches.replace("\\s".toRegex(), "")
         inches = inches.replace("\"".toRegex(), "")
 
+
         var feettoMeters: Float = feets.toFloat() / 3.2808f
         val inchestoMeters: Float = inches.toFloat() / 39.370f
         feettoMeters += inchestoMeters
-        val heightInMeters = String.format("%.2f", feettoMeters).toFloat()
+
+        var formatted = String.format("%.2f", feettoMeters)
+        formatted = formatted.replace(",", ".")
+        val heightInMeters = formatted.toFloat()
         return heightInMeters
     }
 
